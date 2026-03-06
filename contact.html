@@ -7,7 +7,7 @@
   <meta name="description" content="Neem contact op met LEVELINK. Vragen over de lancering of samenwerking? We helpen je graag verder." />
   <meta name="theme-color" content="#0b0f1a" />
 
-  <!-- Open Graph / Social -->
+  <!-- Open Graph / Social (pas de domeinnaam aan als je wil) -->
   <meta property="og:title" content="LEVELINK — Contact" />
   <meta property="og:description" content="Vragen over LEVELINK? Neem rechtstreeks contact op met Willem Biesmans." />
   <meta property="og:type" content="website" />
@@ -15,33 +15,10 @@
   <meta property="og:image" content="https://jouwdomein.be/levelink-hero.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Font (optioneel, veilig voor GitHub Pages) -->
+  <!-- Inter font correct ingeladen -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-  <!-- Structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "LEVELINK",
-    "url": "https://jouwdomein.be",
-    "contactPoint": [{
-      "@type": "ContactPoint",
-      "contactType": "customer support",
-      "email": "willem.biesmans@hotmail.com",
-      "telephone": "+32489308242",
-      "availableLanguage": ["nl", "en"]
-    }],
-    "founder": {
-      "@type": "Person",
-      "name": "Willem Biesmans",
-      "email": "willem.biesmans@hotmail.com",
-      "telephone": "+32489308242"
-    }
-  }
-  </script>
 
   <style>
     :root{
@@ -111,10 +88,8 @@
     }
     .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.22)}
     .btn.primary{border:none; color:#08111e; background:linear-gradient(90deg,var(--accent),var(--accent2)); box-shadow:0 14px 34px rgba(102,227,255,.28)}
-    .btn.ghost{border:1px solid rgba(255,255,255,.16); background:transparent}
     .row-btns{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
 
-    /* Info footer */
     footer{border-top:1px solid var(--border); color:var(--muted); padding:28px 24px; font-size:14px; margin-top:40px}
 
     /* Reveal animatie */
@@ -133,13 +108,15 @@
     <div class="brand"><span class="dot" aria-hidden="true"></span><span>LEVELINK</span></div>
     <div class="links">
       <a href="index.html">Home</a>
-      <a href="contact.html" class="active" aria-current="page">Contact</a>
+      <a class="active" href="contact.html">Contact</a>
     </div>
   </nav>
 
   <main class="wrap" role="main">
     <h1 class="reveal">Contact</h1>
-    <p class="reveal" style="transition-delay:.06s">Vragen over de lancering, distributie of samenwerking? Je bereikt ons rechtstreeks via onderstaande gegevens.</p>
+    <p class="reveal" style="transition-delay:.06s">
+      Vragen over de lancering, distributie of samenwerking? Je bereikt ons rechtstreeks via onderstaande gegevens.
+    </p>
 
     <!-- Contactkaart -->
     <section class="card reveal" style="transition-delay:.12s" aria-label="Contactgegevens">
@@ -150,30 +127,31 @@
         </div>
         <div class="cell">
           <strong>E‑mail</strong><br>
-          <a href="mailto:willem.biesmans@hotmail.com" aria-label="E-mail naar Willem Biesmans">willem.biesmans@hotmail.com</a>
+          <a href="mailto:willem.biesmans@hotmail.com">willem.biesmans@hotmail.com</a>
         </div>
         <div class="cell">
           <strong>Telefoon</strong><br>
-          <a href="tel:+32489308242" aria-label="Bel LEVELINK">+32 489 30 82 42</a>
+          <a href="tel:+32489308242">+32 489 30 82 42</a>
         </div>
         <div class="cell">
           <strong>Beschikbaarheid</strong><br>
-          Ma–Vr 09:00–18:00 (CET)
+          Ma–Vr · 09:00–18:00 (CET)
         </div>
       </div>
 
       <div class="row-btns">
-        <a class="btn primary" href="mailto:willem.biesmans@hotmail.com?subject=LEVELINK%20%E2%80%94%20Info&body=Hi%20Willem%2C%0A%0A" rel="noopener">✉️ E‑mail sturen</a>
-        <a class="btn" href="tel:+32489308242" rel="noopener">📞 Bel</a>
-        <!-- Optioneel: WhatsApp; verwijder comments als je die wil tonen -->
-        <!-- <a class="btn ghost" href="https://wa.me/32489308242" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a> -->
+        <a class="btn primary" href="mailto:willem.biesmans@hotmail.com?subject=LEVELINK%20%E2%80%94%20Info&body=Hi%20Willem%2C%0A%0A" target="_blank" rel="noopener noreferrer">✉️ E‑mail sturen</a>
+        <a class="btn" href="tel:+32489308242">📞 Bel</a>
+        <!-- Optioneel: WhatsApp -->
+        <!-- <a class="btn" href="https://wa.me/32489308242" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a> -->
       </div>
     </section>
 
-    <!-- Kleine informatieve noot -->
     <section class="card reveal" style="transition-delay:.18s" aria-label="Informatie">
       <strong>Snelle respons</strong>
-      <p style="margin:.4rem 0 0; color:#cbd5e1">We reageren doorgaans binnen 1 werkdag. Voeg gerust context toe (gebruikstoepassing, timing, aantallen) zodat we je meteen gericht kunnen helpen.</p>
+      <p style="margin:.4rem 0 0; color:#cbd5e1">
+        We reageren doorgaans binnen 1 werkdag. Voeg gerust context toe (gebruikstoepassing, timing, aantallen) zodat we meteen gericht kunnen helpen.
+      </p>
     </section>
   </main>
 
@@ -191,4 +169,3 @@
   </script>
 </body>
 </html>
-``
