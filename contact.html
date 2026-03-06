@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LEVELINK — Contact</title>
+  <meta name="description" content="Neem contact op met LEVELINK." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0b0f1a;--surface:#0f172a;--text:#e6e8ee;--muted:#9aa3b2;--accent:#66e3ff}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto;color:var(--text);background:linear-gradient(180deg,#0b0f1a 0%, #101828 100%)}
+    a{color:inherit;text-decoration:none}
+
+    .nav{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(10,14,24,.5);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06);z-index:10}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .dot{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 30% 30%, var(--accent) 0%, #38bdf8 60%, transparent 70%);box-shadow:0 0 14px rgba(102,227,255,.6)}
+    .links{display:flex;gap:18px;color:var(--muted);font-weight:600}
+    .links a:hover{color:var(--accent)}
+    .links a.active{color:#fff}
+
+    .wrap{max-width:900px;margin:0 auto;padding:110px 20px 40px}
+    h1{font-size:clamp(28px,5vw,40px);margin:0 0 6px 0}
+    p{color:#cbd5e1}
+    .card{margin-top:18px;display:grid;gap:14px;padding:18px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+    .row{display:flex;flex-wrap:wrap;gap:12px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#fff;font-weight:800}
+    .btn.primary{border:none;color:#0b1220;background:linear-gradient(90deg,var(--accent),#a7f3d0);box-shadow:0 10px 24px rgba(102,227,255,.25)}
+    footer{padding:28px 24px;color:var(--muted);font-size:14px;border-top:1px solid rgba(255,255,255,.06);margin-top:40px}
+  </style>
+</head>
+<body>
+  <nav class="nav" role="navigation" aria-label="Hoofdnavigatie">
+    <div class="brand"><span class="dot"></span><span>LEVELINK</span></div>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a class="active" href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main class="wrap" role="main">
+    <h1>Contact</h1>
+    <p>Heb je vragen of wil je op de hoogte blijven van de lancering? Neem gerust contact op.</p>
+
+    <div class="card" aria-label="Contactgegevens">
+      <div><strong>Naam:</strong> Willem Biesmans</div>
+      <div><strong>E‑mail:</strong> willem.biesmans@hotmail.com</div>
+      <div><strong>Telefoon:</strong> +32 489 30 82 42</div>
+
+      <div class="row" style="margin-top:6px">
+        <a class="btn primary" href="mailto:willem.biesmans@hotmail.com?subject=LEVELINK%20—%20Info&body=Hi%20Willem%2C%0A%0A" target="_blank" rel="noopener noreferrer">E‑mail sturen</a>
+        <a class="btn" href="tel:+32489308242">Bel</a>
+        <!-- optioneel: WhatsApp
+        <a class="btn" href="https://wa.me/32489308242" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        -->
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> LEVELINK
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
