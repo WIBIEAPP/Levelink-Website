@@ -7,7 +7,6 @@
   <meta name="description" content="Neem contact op met LEVELINK. Vragen over de lancering of samenwerking? We helpen je graag verder." />
   <meta name="theme-color" content="#0b0f1a" />
 
-  <!-- Open Graph / Social (pas de domeinnaam aan als je wil) -->
   <meta property="og:title" content="LEVELINK — Contact" />
   <meta property="og:description" content="Vragen over LEVELINK? Neem rechtstreeks contact op met Willem Biesmans." />
   <meta property="og:type" content="website" />
@@ -15,7 +14,6 @@
   <meta property="og:image" content="https://jouwdomein.be/levelink-hero.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Inter font correct ingeladen -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -41,7 +39,6 @@
     }
     a{color:inherit; text-decoration:none}
 
-    /* Glass-nav */
     .nav{
       position:fixed; inset:0 0 auto 0; height:72px; z-index:50;
       display:flex; align-items:center; justify-content:space-between; padding:0 20px;
@@ -54,7 +51,6 @@
       background:radial-gradient(circle at 30% 30%, var(--accent) 0%, #38bdf8 60%, transparent 70%);
       box-shadow:0 0 16px rgba(102,227,255,.65)}
     .links{display:flex; gap:18px; font-weight:600; color:var(--muted)}
-    .links a{position:relative}
     .links a::after{
       content:""; position:absolute; left:0; right:0; bottom:-10px; height:2px;
       background:linear-gradient(90deg,var(--accent),var(--accent2));
@@ -68,7 +64,6 @@
     h1{font-size:clamp(28px,5.2vw,44px); margin:0 0 8px}
     p{color:#cbd5e1}
 
-    /* Panel/card */
     .card{
       margin-top:18px; padding:22px; border-radius:16px;
       background:var(--panel); border:1px solid rgba(255,255,255,.12);
@@ -80,7 +75,6 @@
     .cell{padding:14px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08)}
     .cell strong{color:#fff}
 
-    /* CTA buttons */
     .btn{
       display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; font-weight:800;
       border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.05); color:#fff;
@@ -92,7 +86,6 @@
 
     footer{border-top:1px solid var(--border); color:var(--muted); padding:28px 24px; font-size:14px; margin-top:40px}
 
-    /* Reveal animatie */
     .reveal{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease}
     .reveal.show{opacity:1; transform:none}
 
@@ -103,51 +96,58 @@
   </style>
 </head>
 <body>
-  <!-- Navigatie -->
+
   <nav class="nav" role="navigation" aria-label="Hoofdnavigatie">
-    <div class="brand"><span class="dot" aria-hidden="true"></span><span>LEVELINK</span></div>
+    <div class="brand"><span class="dot"></span><span>LEVELINK</span></div>
     <div class="links">
       <a href="index.html">Home</a>
       <a class="active" href="contact.html">Contact</a>
     </div>
   </nav>
 
-  <main class="wrap" role="main">
+  <main class="wrap">
     <h1 class="reveal">Contact</h1>
     <p class="reveal" style="transition-delay:.06s">
       Vragen over de lancering, distributie of samenwerking? Je bereikt ons rechtstreeks via onderstaande gegevens.
     </p>
 
-    <!-- Contactkaart -->
-    <section class="card reveal" style="transition-delay:.12s" aria-label="Contactgegevens">
+    <section class="card reveal" style="transition-delay:.12s">
       <div class="grid">
+
         <div class="cell">
           <strong>Naam</strong><br>
           Willem Biesmans
         </div>
+
         <div class="cell">
           <strong>E‑mail</strong><br>
           <a href="mailto:willem.biesmans@hotmail.com">willem.biesmans@hotmail.com</a>
         </div>
+
         <div class="cell">
           <strong>Telefoon</strong><br>
           <a href="tel:+32489308242">+32 489 30 82 42</a>
         </div>
+
+        <!-- NIEUW: LinkedIn -->
         <div class="cell">
-          <strong>Beschikbaarheid</strong><br>
-          Ma–Vr · 09:00–18:00 (CET)
+          <strong>LinkedIn</strong><br>
+          <a href="https://www.linkedin.com/in/willem-biesmans" target="_blank" rel="noopener noreferrer">
+            linkedin.com/in/willem-biesmans
+          </a>
         </div>
+
       </div>
 
       <div class="row-btns">
-        <a class="btn primary" href="mailto:willem.biesmans@hotmail.com?subject=LEVELINK%20%E2%80%94%20Info&body=Hi%20Willem%2C%0A%0A" target="_blank" rel="noopener noreferrer">✉️ E‑mail sturen</a>
+        <a class="btn primary" href="mailto:willem.biesmans@hotmail.com?subject=LEVELINK%20%E2%80%94%20Info&body=Hi%20Willem%2C%0A%0A" target="_blank">✉️ E‑mail sturen</a>
         <a class="btn" href="tel:+32489308242">📞 Bel</a>
-        <!-- Optioneel: WhatsApp -->
-        <!-- <a class="btn" href="https://wa.me/32489308242" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a> -->
+        <a class="btn" href="https://www.linkedin.com/in/willem-biesmans" target="_blank">🔗 LinkedIn</a>
       </div>
+
     </section>
 
-    <section class="card reveal" style="transition-delay:.18s" aria-label="Informatie">
+    <section class="card reveal" style="transition-delay:.18s">
       <strong>Snelle respons</strong>
       <p style="margin:.4rem 0 0; color:#cbd5e1">
         We reageren doorgaans binnen 1 werkdag. Voeg gerust context toe (gebruikstoepassing, timing, aantallen) zodat we meteen gericht kunnen helpen.
@@ -158,14 +158,13 @@
   <footer>© <span id="year"></span> LEVELINK — Alle rechten voorbehouden.</footer>
 
   <script>
-    // Jaar
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Reveal on scroll
     const obs = new IntersectionObserver((entries)=>entries.forEach(e=>{
       if(e.isIntersecting) e.target.classList.add('show');
     }), {threshold:.12});
     document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   </script>
+
 </body>
 </html>
