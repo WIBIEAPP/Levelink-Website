@@ -16,8 +16,8 @@
       --bg-2: #0f172a;
       --text: #e6e8ee;
       --muted:#9aa3b2;
-      --accent:#66e3ff;      /* cyaan */
-      --accent-2:#a7f3d0;    /* mint */
+      --accent:#66e3ff;
+      --accent-2:#a7f3d0;
       --glass: rgba(12,18,32,.55);
       --border: rgba(255,255,255,.10);
       --shadow: 0 20px 60px rgba(8, 24, 48, .35);
@@ -63,7 +63,7 @@
     /* ——— Hero ——— */
     .hero{
       position:relative; min-height:100dvh; display:grid; place-items:center; overflow:hidden;
-      isolation:isolate; /* voor lagen */
+      isolation:isolate;
     }
     .hero::before{
       content:""; position:absolute; inset:-2% -2% -2% -2%;
@@ -73,7 +73,6 @@
       transition: transform .6s ease;
       will-change: transform;
     }
-    /* zachte kleurglow */
     .hero::after{
       content:""; position:absolute; inset:0;
       background:
@@ -125,7 +124,6 @@
       padding:28px 24px; font-size:14px
     }
 
-    /* ——— Subtiele scroll‑reveal ——— */
     .reveal{opacity:0; transform:translateY(10px); transition:opacity .6s ease, transform .6s ease}
     .reveal.show{opacity:1; transform:none}
 
@@ -135,37 +133,29 @@
     }
   </style>
 </head>
+
 <body>
   <nav class="nav" role="navigation" aria-label="Hoofdnavigatie">
     <div class="brand"><span class="dot"></span><span>LEVELINK</span></div>
     <div class="links">
-      <a href="index.html" class="active">Home</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </nav>
-
-  <header class="hero" role="banner" aria-label="Hero met product sfeerbeeld" id="hero">
+      <a hreflabel="Hero met product sfeerbeeld" id="hero">
     <div class="container">
       <div class="stack">
-        <span class="badge reveal">⚡ Coming soon</span>
+        <span class="badge reveal">⚡ Kickstarter live</span>
         <h1 class="title reveal" style="transition-delay:.06s">
-          Monitor je niveau zonder moeite — <span class="accent">binnenkort live</span>
+          Monitor je niveau zonder moeite — <span class="accent">LEVELINK</span>
         </h1>
         <p class="lead reveal" style="transition-delay:.12s">
-          We leggen de laatste hand aan LEVELINK. Scherp design, eenvoudige installatie, heldere inzichten.
+          LEVELINK is nu live op Kickstarter! Steun ons om een degelijk prototype te bouwen en ons product te lanceren.
         </p>
 
-        
         <div class="actions reveal" style="transition-delay:.18s">
-          https://www.kickstarter.com/projects/levelinkbe/levelink-prototype-development-campaign
-          ⭐ Steun ons op Kickstarter
-          </a>
-          contact.htmlContact</a>
+          <a class="btn primary" href="https://www.kickstarter.com/projects/levelinkbe/levelink-prototype-development-campaign" target="_blank" rel="noopener noreferrer">⭐ Steun ons op Kickstarter</a>
+          <a class="btn" href="contact.html">Contact</a>
         </div>
 
-
         <p class="note reveal" style="transition-delay:.24s">
-          Vragen of vroegtijdig op de hoogte? Neem even contact op — we antwoorden snel.
+          Vragen of wil je op de hoogte blijven? Volg ons op LinkedIn of stuur ons een bericht.
         </p>
       </div>
     </div>
@@ -174,24 +164,21 @@
   <footer>© <span id="year"></span> LEVELINK — Alle rechten voorbehouden.</footer>
 
   <script>
-    // Jaar
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Subtiele scroll‑reveal
     const obs = new IntersectionObserver(entries=>{
       entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show') })
     }, {threshold:.12});
     document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-    // Parallax‑achtige tilt bij muisbeweging
     const hero = document.getElementById('hero');
     let raf;
     hero.addEventListener('mousemove', (e)=>{
       cancelAnimationFrame(raf);
       const r = hero.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;   // 0..1
-      const y = (e.clientY - r.top) / r.height;  // 0..1
-      const tx = (x - .5) * 6;  // max 6px
+      const x = (e.clientX - r.left) / r.width;
+      const y = (e.clientY - r.top) / r.height;
+      const tx = (x - .5) * 6;
       const ty = (y - .5) * 6;
       raf = requestAnimationFrame(()=>{
         hero.style.setProperty('--tilt-x', tx.toFixed(2)+'px');
