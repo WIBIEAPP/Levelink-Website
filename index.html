@@ -284,6 +284,14 @@
 
 
     // ── Newsletter toggle ───────────────────────────────────────────────────
+    function openNewsletter() {
+      const wrapper = document.getElementById('signup-wrapper');
+      const btn = document.getElementById('newsletter-btn');
+      wrapper.classList.add('open');
+      btn.classList.add('active');
+      setTimeout(() => wrapper.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
+    }
+
     document.getElementById('newsletter-btn').addEventListener('click', function() {
       const wrapper = document.getElementById('signup-wrapper');
       const isOpen = wrapper.classList.toggle('open');
@@ -292,6 +300,8 @@
         setTimeout(() => wrapper.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
       }
     });
+
+    if (location.hash === '#nieuwsbrief') openNewsletter();
 
     // ── Pre-registration form ──────────────────────────────────────────────
     // Submissions go to the Cloudflare Worker proxy (worker/subscribe.js).
