@@ -1,19 +1,5 @@
-/**
- * Cloudflare Worker — Brevo newsletter subscribe proxy
- *
- * Environment variables to set in the Cloudflare dashboard
- * (Workers & Pages → your worker → Settings → Variables & Secrets):
- *
- *   BREVO_API_KEY   your Brevo API key  (secret, encrypted)
- *   BREVO_LIST_ID   numeric list ID from Brevo  (plain text, e.g. "3")
- *   ALLOWED_ORIGIN  your site URL, e.g. "https://www.levelink.be"
- *
- * Deploy:
- *   npm install -g wrangler
- *   npx wrangler login
- *   cd worker
- *   npx wrangler deploy subscribe.js --name levelink-subscribe --compatibility-date 2024-01-01
- */
+// Cloudflare Worker — Brevo double opt-in proxy
+// See README.md for deploy instructions and curl test examples.
 
 const BREVO_DOI_URL = 'https://api.brevo.com/v3/contacts/doubleOptinConfirmation';
 
