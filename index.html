@@ -134,6 +134,47 @@
       .links{gap:14px}
       .btn{width:100%; justify-content:center}
     }
+
+    /* Signup form */
+    .form-group{display:flex; flex-direction:column; gap:8px; margin-top:14px}
+    .form-row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .form-field{display:flex; flex-direction:column; gap:6px}
+    .form-field label{font-size:13px; font-weight:600; color:var(--muted)}
+    .form-field input{
+      padding:11px 14px; border-radius:10px; font-size:14px; font-family:inherit;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+      color:#fff; outline:none; transition:border-color .2s ease;
+    }
+    .form-field input:focus{border-color:var(--accent)}
+    .form-field input::placeholder{color:var(--muted)}
+    .form-submit{margin-top:6px}
+    .status{margin-top:10px; font-size:14px; font-weight:600; min-height:20px}
+    .status.ok{color:var(--accent-2)}
+    .status.err{color:#f87171}
+    @media (max-width:600px){.form-row{grid-template-columns:1fr}}
+
+    /* Signup card */
+    #signup{
+      padding:22px; border-radius:16px;
+      background:rgba(102,227,255,.04);
+      border:1px solid rgba(102,227,255,.30);
+      box-shadow:0 14px 34px rgba(102,227,255,.18);
+    }
+
+    /* Signup panel collapse */
+    .signup-wrapper{
+      max-height:0; overflow:hidden; opacity:0; margin-top:0;
+      transition: max-height .4s ease, opacity .3s ease, margin-top .3s ease;
+    }
+    .signup-wrapper.open{
+      max-height:700px; opacity:1; margin-top:14px;
+    }
+    #newsletter-btn.active{
+      border:none; color:#08111e;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      box-shadow:0 14px 34px rgba(102,227,255,.28);
+    }
+
   </style>
 </head>
 <body>
@@ -156,13 +197,49 @@
         <h1 class="title reveal" style="transition-delay:.06s">
           Monitor het niveau van je waterput zonder moeite — <span class="accent">binnenkort live</span>
         </h1>
+
         <p class="lead reveal" style="transition-delay:.12s">
           We leggen de laatste hand aan LEVELINK. Scherp design, eenvoudige installatie, heldere inzichten.
         </p>
 
+
+
         <div class="actions reveal" style="transition-delay:.18s">
-          <a class="btn primary" aria-disabled="true">Coming soon</a>
-          <a class="btn" href="contact.html">Contact</a>
+          <button class="btn primary" type="button" id="newsletter-btn">📧 Nieuwsbrief</button>
+          <a class="btn primary" href="contact.html">Contact</a>
+        </div>
+
+        <!-- Pre-registration / newsletter signup (hidden until toggled) -->
+        <div id="signup-wrapper" class="signup-wrapper">
+          <section class="card" id="signup">
+            <strong>Blijf op de hoogte</strong>
+            <p style="margin:.4rem 0 0; color:#cbd5e1">
+              Laat je e‑mailadres achter en ontvang updates over de lancering van LEVELINK.
+            </p>
+
+            <form id="signup-form" novalidate>
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="sf-firstname">Voornaam</label>
+                    <input type="text" id="sf-firstname" name="firstname" placeholder="Jan" autocomplete="given-name" />
+                  </div>
+                  <div class="form-field">
+                    <label for="sf-lastname">Achternaam</label>
+                    <input type="text" id="sf-lastname" name="lastname" placeholder="Janssen" autocomplete="family-name" />
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label for="sf-email">E‑mailadres <span style="color:#f87171">*</span></label>
+                  <input type="email" id="sf-email" name="email" placeholder="jij@voorbeeld.be" required autocomplete="email" />
+                </div>
+              </div>
+              <div class="form-submit">
+                <button type="submit" class="btn primary">📬 Inschrijven voor updates</button>
+              </div>
+              <p class="status" id="signup-status" aria-live="polite"></p>
+            </form>
+          </section>
         </div>
 
         <p class="note reveal" style="transition-delay:.24s">
@@ -184,25 +261,85 @@
     }, {threshold:.12});
     document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-    // Parallax‑achtige tilt bij muisbeweging
-    const hero = document.getElementById('hero');
-    let raf;
-    hero.addEventListener('mousemove', (e)=>{
-      cancelAnimationFrame(raf);
-      const r = hero.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width;   // 0..1
-      const y = (e.clientY - r.top) / r.height;  // 0..1
-      const tx = (x - .5) * 6;  // max 6px
-      const ty = (y - .5) * 6;
-      raf = requestAnimationFrame(()=>{
-        hero.style.setProperty('--tilt-x', tx.toFixed(2)+'px');
-        hero.style.setProperty('--tilt-y', ty.toFixed(2)+'px');
-        hero.style.setProperty('--tilt-r', (tx*.18).toFixed(2)+'deg');
-        hero.style.transform = `translate(var(--tilt-x), var(--tilt-y)) rotateZ(var(--tilt-r))`;
-      });
+    // // Parallax‑achtige tilt bij muisbeweging
+    // const hero = document.getElementById('hero');
+    // let raf;
+    // hero.addEventListener('mousemove', (e)=>{
+    //   cancelAnimationFrame(raf);
+    //   const r = hero.getBoundingClientRect();
+    //   const x = (e.clientX - r.left) / r.width;   // 0..1
+    //   const y = (e.clientY - r.top) / r.height;  // 0..1
+    //   const tx = (x - .5) * 6;  // max 6px
+    //   const ty = (y - .5) * 6;
+    //   raf = requestAnimationFrame(()=>{
+    //     hero.style.setProperty('--tilt-x', tx.toFixed(2)+'px');
+    //     hero.style.setProperty('--tilt-y', ty.toFixed(2)+'px');
+    //     hero.style.setProperty('--tilt-r', (tx*.18).toFixed(2)+'deg');
+    //     hero.style.transform = `translate(var(--tilt-x), var(--tilt-y)) rotateZ(var(--tilt-r))`;
+    //   });
+    // });
+    // hero.addEventListener('mouseleave', ()=>{
+    //   hero.style.transform = 'none';
+    // });
+
+
+    // ── Newsletter toggle ───────────────────────────────────────────────────
+    document.getElementById('newsletter-btn').addEventListener('click', function() {
+      const wrapper = document.getElementById('signup-wrapper');
+      const isOpen = wrapper.classList.toggle('open');
+      this.classList.toggle('active', isOpen);
+      if (isOpen) {
+        setTimeout(() => wrapper.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
+      }
     });
-    hero.addEventListener('mouseleave', ()=>{
-      hero.style.transform = 'none';
+
+    // ── Pre-registration form ──────────────────────────────────────────────
+    // Submissions go to the Cloudflare Worker proxy (worker/subscribe.js).
+    // After deploying the Worker, replace the URL below with your Worker URL,
+    // e.g. https://levelink-subscribe.YOUR_SUBDOMAIN.workers.dev/subscribe
+    const WORKER_URL = 'https://levelink-subscribe.thomas-biesmans.workers.dev';
+
+    document.getElementById('signup-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const status = document.getElementById('signup-status');
+      const btn = this.querySelector('button[type=submit]');
+      const email = document.getElementById('sf-email').value.trim();
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.textContent = 'Voer een geldig e‑mailadres in.';
+        status.className = 'status err';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Bezig…';
+      status.textContent = '';
+      status.className = 'status';
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            firstname: document.getElementById('sf-firstname').value.trim(),
+            lastname:  document.getElementById('sf-lastname').value.trim(),
+          }),
+        });
+        if (res.ok) {
+          status.textContent = 'Bedankt! Check je inbox voor een bevestigingsmail.';
+          status.className = 'status ok';
+          this.reset();
+        } else {
+          throw new Error('server');
+        }
+      } catch {
+        status.textContent = 'Er ging iets mis. Probeer het opnieuw of stuur ons een e‑mail.';
+        status.className = 'status err';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '📬 Inschrijven voor updates';
+      }
     });
   </script>
   <!-- Cloudflare Web Analytics -->
