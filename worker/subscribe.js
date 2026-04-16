@@ -61,7 +61,12 @@ export default {
 
     const errBody = await brevoRes.text();
     console.error('Brevo DOI error', brevoRes.status, errBody);
-    return corsResponse(JSON.stringify({ error: 'Upstream error' }), 502, origin, allowed);
+    let brevoMessage = '';
+    try { brevoMessage = JSON.parse(errBody)?.message ?? errBody; } catch { brevoMessage = errBody; }
+    return corsResponse(
+      JSON.stringify({ error: `Brevo ${brevoRes.status}: ${brevoMessage}` }),
+      502, origin, allowed
+    );
   },
 };
 

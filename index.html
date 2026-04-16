@@ -420,15 +420,18 @@
             email_updates: emailUpdates,
           }),
         });
-        if (res.ok) {
+        const json = await res.json().catch(() => ({}));
+        if (res.ok && json.ok) {
           status.textContent = 'Bedankt! Check je inbox voor een bevestigingsmail.';
           status.className = 'status ok';
           this.reset();
         } else {
-          throw new Error('server');
+          const detail = json.error ? ` (${json.error})` : ` (HTTP ${res.status})`;
+          status.textContent = `Er ging iets mis${detail}. Probeer het opnieuw of stuur ons een e‑mail.`;
+          status.className = 'status err';
         }
-      } catch {
-        status.textContent = 'Er ging iets mis. Probeer het opnieuw of stuur ons een e‑mail.';
+      } catch (err) {
+        status.textContent = `Er ging iets mis (${err.message}). Probeer het opnieuw of stuur ons een e‑mail.`;
         status.className = 'status err';
       } finally {
         btn.disabled = false;
