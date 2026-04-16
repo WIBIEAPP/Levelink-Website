@@ -32,8 +32,12 @@ export default {
     const payload = {
       email,
       attributes: {
-        FIRSTNAME: (data.firstname ?? '').trim(),
-        LASTNAME:  (data.lastname  ?? '').trim(),
+        FIRSTNAME:     (data.firstname   ?? '').trim(),
+        LASTNAME:      (data.lastname    ?? '').trim(),
+        POSTCODE:      (data.postcode    ?? '').trim().toUpperCase(),
+        TYPE_WONING:   (data.type_woning ?? '').trim(),
+        INTEREST:      (data.interest    ?? '').trim(),
+        EMAIL_UPDATES: data.email_updates === true,
       },
       includeListIds:  [Number(env.BREVO_LIST_ID)],
       templateId:      Number(env.BREVO_DOI_TEMPLATE_ID),
