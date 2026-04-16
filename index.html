@@ -154,7 +154,7 @@
     @media (max-width:600px){.form-row{grid-template-columns:1fr}}
 
     /* Signup card */
-    #signup{
+    #signup, #installer-signup{
       padding:22px; border-radius:16px;
       background:rgba(102,227,255,.04);
       border:1px solid rgba(102,227,255,.30);
@@ -169,7 +169,7 @@
     .signup-wrapper.open{
       max-height:1100px; opacity:1; margin-top:14px;
     }
-    #newsletter-btn.active{
+    #newsletter-btn.active, #installer-btn.active{
       border:none; color:#08111e;
       background:linear-gradient(90deg,var(--accent),var(--accent-2));
       box-shadow:0 14px 34px rgba(102,227,255,.28);
@@ -239,7 +239,8 @@
 
         <div class="actions reveal" style="transition-delay:.18s">
           <button class="btn primary" type="button" id="newsletter-btn">🏠 Pre-order voor thuis</button>
-          <a class="btn primary" href="contact.html">Contact</a>
+          <button class="btn primary" type="button" id="installer-btn">🔧 Voor installateurs</button>
+          <a class="btn" href="contact.html">Contact</a>
         </div>
 
         <!-- Pre-registration / newsletter signup (hidden until toggled) -->
@@ -312,6 +313,71 @@
           </section>
         </div>
 
+        <!-- Installer / B2B signup (hidden until toggled) -->
+        <div id="installer-wrapper" class="signup-wrapper">
+          <section class="card" id="installer-signup">
+            <strong>Voor installateurs</strong>
+            <p style="margin:.4rem 0 0; color:#cbd5e1">
+              Geef uw interesse aan als installateur en we nemen snel contact met u op.
+            </p>
+            <form id="installer-form" novalidate>
+              <div class="form-group">
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="if-bedrijfsnaam">Bedrijfsnaam (optioneel)</label>
+                    <input type="text" id="if-bedrijfsnaam" name="bedrijfsnaam" placeholder="Loodgieters BVBA" />
+                  </div>
+                  <div class="form-field">
+                    <label for="if-contactpersoon">Contactpersoon <span style="color:#f87171">*</span></label>
+                    <input type="text" id="if-contactpersoon" name="contactpersoon" placeholder="Jan Janssen" required />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="if-email">E&#8209;mailadres <span style="color:#f87171">*</span></label>
+                    <input type="email" id="if-email" name="email" placeholder="info@bedrijf.be" required autocomplete="email" />
+                  </div>
+                  <div class="form-field">
+                    <label for="if-telefoon">Telefoon (optioneel)</label>
+                    <input type="tel" id="if-telefoon" name="telefoon" placeholder="+32 ..." autocomplete="tel" />
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label for="if-regio">Regio <span style="color:#f87171">*</span></label>
+                  <select id="if-regio" name="regio" required>
+                    <option value="">— selecteer provincie —</option>
+                    <option>Antwerpen</option>
+                    <option>Limburg</option>
+                    <option>Oost-Vlaanderen</option>
+                    <option>Vlaams-Brabant</option>
+                    <option>West-Vlaanderen</option>
+                    <option>Brussel (Hoofdstedelijk Gewest)</option>
+                    <option>Henegouwen</option>
+                    <option>Luik</option>
+                    <option>Luxemburg</option>
+                    <option>Namen</option>
+                    <option>Waals-Brabant</option>
+                  </select>
+                </div>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="if-preorders"># pre-orders <span style="color:#f87171">*</span></label>
+                    <input type="number" id="if-preorders" name="preorders" placeholder="5" min="1" required />
+                  </div>
+                  <div class="form-field">
+                    <label for="if-installaties"># geschatte installaties per jaar <span style="color:#f87171">*</span></label>
+                    <input type="number" id="if-installaties" name="installaties_per_jaar" placeholder="20" min="1" required />
+                  </div>
+                </div>
+              </div>
+              <div class="form-submit">
+                <button type="submit" class="btn primary">🔧 Ja, ik ben geïnteresseerd</button>
+              </div>
+              <p class="status" id="installer-status" aria-live="polite"></p>
+            </form>
+          </section>
+        </div>
+
         <p class="note reveal" style="transition-delay:.24s">
           Vragen of vroegtijdig op de hoogte? Neem even contact op — we antwoorden snel.
         </p>
@@ -356,7 +422,19 @@
     // ── Newsletter toggle ───────────────────────────────────────────────────
     function openNewsletter() {
       const wrapper = document.getElementById('signup-wrapper');
-      const btn = document.getElementById('newsletter-btn');
+      const btn     = document.getElementById('newsletter-btn');
+      document.getElementById('installer-wrapper').classList.remove('open');
+      document.getElementById('installer-btn').classList.remove('active');
+      wrapper.classList.add('open');
+      btn.classList.add('active');
+      setTimeout(() => wrapper.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
+    }
+
+    function openInstaller() {
+      const wrapper = document.getElementById('installer-wrapper');
+      const btn     = document.getElementById('installer-btn');
+      document.getElementById('signup-wrapper').classList.remove('open');
+      document.getElementById('newsletter-btn').classList.remove('active');
       wrapper.classList.add('open');
       btn.classList.add('active');
       setTimeout(() => wrapper.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
@@ -364,20 +442,33 @@
 
     document.getElementById('newsletter-btn').addEventListener('click', function() {
       const wrapper = document.getElementById('signup-wrapper');
-      const isOpen = wrapper.classList.toggle('open');
+      const isOpen  = wrapper.classList.toggle('open');
       this.classList.toggle('active', isOpen);
+      document.getElementById('installer-wrapper').classList.remove('open');
+      document.getElementById('installer-btn').classList.remove('active');
       if (isOpen) {
         setTimeout(() => wrapper.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
       }
     });
 
-    if (location.hash === '#nieuwsbrief') openNewsletter();
+    document.getElementById('installer-btn').addEventListener('click', function() {
+      const wrapper = document.getElementById('installer-wrapper');
+      const isOpen  = wrapper.classList.toggle('open');
+      this.classList.toggle('active', isOpen);
+      document.getElementById('signup-wrapper').classList.remove('open');
+      document.getElementById('newsletter-btn').classList.remove('active');
+      if (isOpen) {
+        setTimeout(() => wrapper.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
+      }
+    });
 
-    // ── Pre-registration form ──────────────────────────────────────────────
-    // Submissions go to the Cloudflare Worker proxy (worker/subscribe.js).
-    // After deploying the Worker, replace the URL below with your Worker URL,
-    // e.g. https://levelink-subscribe.YOUR_SUBDOMAIN.workers.dev/subscribe
+    if (location.hash === '#nieuwsbrief')   openNewsletter();
+    if (location.hash === '#installateurs') openInstaller();
+
+    // ── Worker URL ──────────────────────────────────────────────────────────
     const WORKER_URL = 'https://levelink-subscribe.thomas-biesmans.workers.dev';
+
+    // ── Consumer (home owner) form ──────────────────────────────────────────
 
     document.getElementById('signup-form').addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -436,6 +527,81 @@
       } finally {
         btn.disabled = false;
         btn.textContent = '✅ Ja, zet mij op de pre-orderlijst';
+      }
+    });
+
+    // ── Installer (B2B) form ─────────────────────────────────────────────────
+    document.getElementById('installer-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const status         = document.getElementById('installer-status');
+      const btn            = this.querySelector('button[type=submit]');
+      const email          = document.getElementById('if-email').value.trim();
+      const contactpersoon = document.getElementById('if-contactpersoon').value.trim();
+      const regio          = document.getElementById('if-regio').value;
+      const preorders      = document.getElementById('if-preorders').value;
+      const installaties   = document.getElementById('if-installaties').value;
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.textContent = 'Voer een geldig e\u2011mailadres in.';
+        status.className = 'status err';
+        return;
+      }
+      if (!contactpersoon) {
+        status.textContent = 'Vul de naam van de contactpersoon in.';
+        status.className = 'status err';
+        return;
+      }
+      if (!regio) {
+        status.textContent = 'Selecteer een regio.';
+        status.className = 'status err';
+        return;
+      }
+      if (!preorders || Number(preorders) < 1) {
+        status.textContent = 'Vul het aantal pre-orders in (minimaal 1).';
+        status.className = 'status err';
+        return;
+      }
+      if (!installaties || Number(installaties) < 1) {
+        status.textContent = 'Vul het geschatte aantal installaties per jaar in (minimaal 1).';
+        status.className = 'status err';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Bezig\u2026';
+      status.textContent = '';
+      status.className = 'status';
+
+      try {
+        const res = await fetch(WORKER_URL + '/installer', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            contactpersoon,
+            bedrijfsnaam:          document.getElementById('if-bedrijfsnaam').value.trim(),
+            telefoon:              document.getElementById('if-telefoon').value.trim(),
+            regio,
+            preorders:             Number(preorders),
+            installaties_per_jaar: Number(installaties),
+          }),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (res.ok && json.ok) {
+          status.textContent = 'Bedankt! We nemen snel contact met u op.';
+          status.className = 'status ok';
+          this.reset();
+        } else {
+          const detail = json.error ? ` (${json.error})` : ` (HTTP ${res.status})`;
+          status.textContent = `Er ging iets mis${detail}. Probeer het opnieuw of stuur ons een e\u2011mail.`;
+          status.className = 'status err';
+        }
+      } catch (err) {
+        status.textContent = `Er ging iets mis (${err.message}). Probeer het opnieuw of stuur ons een e\u2011mail.`;
+        status.className = 'status err';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '\uD83D\uDD27 Ja, ik ben ge\xEFnteresseerd';
       }
     });
   </script>
