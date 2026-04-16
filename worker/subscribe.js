@@ -56,8 +56,8 @@ export default {
       body: JSON.stringify(payload),
     });
 
-    // DOI endpoint returns 204 on success (confirmation email queued)
-    if (brevoRes.status === 204) {
+    // DOI endpoint returns 204 (existing contact) or 201 (new contact) on success
+    if (brevoRes.status === 204 || brevoRes.status === 201) {
       return corsResponse(JSON.stringify({ ok: true }), 200, origin, allowed);
     }
 
