@@ -81,7 +81,8 @@ Browser → POST JSON → Cloudflare Worker → Brevo DOI API → confirmation e
 |---|---|---|
 | `ALLOWED_ORIGIN` | Plaintext (wrangler.toml) | `https://www.levelink.be` |
 | `BREVO_LIST_ID` | Plaintext (wrangler.toml) | `3` |
-| `BREVO_DOI_TEMPLATE_ID` | Plaintext (wrangler.toml) | `5` |
+| `BREVO_DOI_TEMPLATE_ID` | Plaintext (wrangler.toml) | `5` — used when `email_updates` is **checked** |
+| `BREVO_DOI_TEMPLATE_ID_NOSUB` | Plaintext (wrangler.toml) | `6` — used when `email_updates` is **unchecked** |
 | `BREVO_API_KEY` | **Encrypted secret** | set via `wrangler secret put`, never in toml or code |
 
 `wrangler.toml` is intentionally committed to git. `BREVO_API_KEY` is intentionally excluded.
