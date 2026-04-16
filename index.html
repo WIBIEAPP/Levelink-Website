@@ -167,13 +167,46 @@
       transition: max-height .4s ease, opacity .3s ease, margin-top .3s ease;
     }
     .signup-wrapper.open{
-      max-height:700px; opacity:1; margin-top:14px;
+      max-height:1100px; opacity:1; margin-top:14px;
     }
     #newsletter-btn.active{
       border:none; color:#08111e;
       background:linear-gradient(90deg,var(--accent),var(--accent-2));
       box-shadow:0 14px 34px rgba(102,227,255,.28);
     }
+
+    /* Select */
+    .form-field select{
+      padding:11px 14px; border-radius:10px; font-size:14px; font-family:inherit;
+      background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+      color:#fff; outline:none; transition:border-color .2s ease; cursor:pointer;
+      appearance:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239aa3b2' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat:no-repeat; background-position:right 14px center; padding-right:36px;
+    }
+    .form-field select:focus{border-color:var(--accent)}
+    .form-field select option{background:#0f172a; color:#fff}
+
+    /* Interest selection boxes */
+    .form-fieldset{border:none; padding:0; margin:4px 0 0}
+    .form-fieldset legend{font-size:13px; font-weight:600; color:var(--muted); margin-bottom:6px; padding:0}
+    .option-group{display:flex; flex-direction:column; gap:6px}
+    .option-card{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:10px; font-size:14px;
+      border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04);
+      cursor:pointer; transition:border-color .2s, background .2s; user-select:none;
+    }
+    .option-card:hover{border-color:rgba(102,227,255,.4); background:rgba(102,227,255,.06)}
+    .option-card input[type=radio]{accent-color:var(--accent); width:16px; height:16px; flex-shrink:0}
+    .option-card:has(input:checked){border-color:rgba(102,227,255,.5); background:rgba(102,227,255,.08)}
+
+    /* Checkbox */
+    .form-checkbox{
+      display:flex; align-items:flex-start; gap:10px; margin-top:4px;
+      font-size:13px; font-weight:600; color:var(--muted); cursor:pointer;
+    }
+    .form-checkbox input[type=checkbox]{accent-color:var(--accent); width:16px; height:16px; flex-shrink:0; margin-top:1px}
 
   </style>
 </head>
@@ -205,16 +238,16 @@
 
 
         <div class="actions reveal" style="transition-delay:.18s">
-          <button class="btn primary" type="button" id="newsletter-btn">📧 Nieuwsbrief</button>
+          <button class="btn primary" type="button" id="newsletter-btn">🏠 Pre-order voor thuis</button>
           <a class="btn primary" href="contact.html">Contact</a>
         </div>
 
         <!-- Pre-registration / newsletter signup (hidden until toggled) -->
         <div id="signup-wrapper" class="signup-wrapper">
           <section class="card" id="signup">
-            <strong>Blijf op de hoogte</strong>
+            <strong>Pre-order voor thuis</strong>
             <p style="margin:.4rem 0 0; color:#cbd5e1">
-              Laat je e‑mailadres achter en ontvang updates over de lancering van LEVELINK.
+              Geef je interesse aan en ontvang als eerste een seintje wanneer LEVELINK beschikbaar is.
             </p>
 
             <form id="signup-form" novalidate>
@@ -233,9 +266,46 @@
                   <label for="sf-email">E‑mailadres <span style="color:#f87171">*</span></label>
                   <input type="email" id="sf-email" name="email" placeholder="jij@voorbeeld.be" required autocomplete="email" />
                 </div>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="sf-postcode">Postcode <span style="color:#f87171">*</span></label>
+                    <input type="text" id="sf-postcode" name="postcode" placeholder="2000" required maxlength="10" />
+                  </div>
+                  <div class="form-field">
+                    <label for="sf-type-woning">Type woning (optioneel)</label>
+                    <select id="sf-type-woning" name="type_woning">
+                      <option value="">— selecteer —</option>
+                      <option value="Appartement (gelijkvloers)">Appartement (gelijkvloers)</option>
+                      <option value="Appartement (blok)">Appartement (blok)</option>
+                      <option value="Woning">Woning</option>
+                      <option value="Anders">Anders</option>
+                    </select>
+                  </div>
+                </div>
+                <fieldset class="form-fieldset">
+                  <legend>Mijn situatie</legend>
+                  <div class="option-group">
+                    <label class="option-card">
+                      <input type="radio" name="interest" value="Ik heb een regenwaterput" />
+                      <span>Ik heb een regenwaterput</span>
+                    </label>
+                    <label class="option-card">
+                      <input type="radio" name="interest" value="Ik ga er een installeren" />
+                      <span>Ik ga er een installeren</span>
+                    </label>
+                    <label class="option-card">
+                      <input type="radio" name="interest" value="Ik verken opties" />
+                      <span>Ik verken opties</span>
+                    </label>
+                  </div>
+                </fieldset>
+                <label class="form-checkbox">
+                  <input type="checkbox" id="sf-email-updates" name="email_updates" />
+                  <span>Ik wil update mails over de lancering ontvangen</span>
+                </label>
               </div>
               <div class="form-submit">
-                <button type="submit" class="btn primary">📬 Inschrijven voor updates</button>
+                <button type="submit" class="btn primary">✅ Ja, zet mij op de pre-orderlijst</button>
               </div>
               <p class="status" id="signup-status" aria-live="polite"></p>
             </form>
@@ -313,10 +383,16 @@
       e.preventDefault();
       const status = document.getElementById('signup-status');
       const btn = this.querySelector('button[type=submit]');
-      const email = document.getElementById('sf-email').value.trim();
+      const email    = document.getElementById('sf-email').value.trim();
+      const postcode = document.getElementById('sf-postcode').value.trim();
 
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         status.textContent = 'Voer een geldig e‑mailadres in.';
+        status.className = 'status err';
+        return;
+      }
+      if (!postcode || !/^[A-Za-z0-9]+$/.test(postcode)) {
+        status.textContent = 'Voer een geldige postcode in.';
         status.className = 'status err';
         return;
       }
@@ -326,14 +402,22 @@
       status.textContent = '';
       status.className = 'status';
 
+      const interest     = (this.querySelector('input[name=interest]:checked') || {}).value || '';
+      const typeWoning   = document.getElementById('sf-type-woning').value;
+      const emailUpdates = document.getElementById('sf-email-updates').checked;
+
       try {
         const res = await fetch(WORKER_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             email,
-            firstname: document.getElementById('sf-firstname').value.trim(),
-            lastname:  document.getElementById('sf-lastname').value.trim(),
+            firstname:     document.getElementById('sf-firstname').value.trim(),
+            lastname:      document.getElementById('sf-lastname').value.trim(),
+            postcode:      postcode.toUpperCase(),
+            type_woning:   typeWoning,
+            interest,
+            email_updates: emailUpdates,
           }),
         });
         if (res.ok) {
@@ -348,7 +432,7 @@
         status.className = 'status err';
       } finally {
         btn.disabled = false;
-        btn.textContent = '📬 Inschrijven voor updates';
+        btn.textContent = '✅ Ja, zet mij op de pre-orderlijst';
       }
     });
   </script>
