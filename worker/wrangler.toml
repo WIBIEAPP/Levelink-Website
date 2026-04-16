@@ -7,5 +7,5 @@ ALLOWED_ORIGIN       = "https://www.levelink.be"
 BREVO_LIST_ID        = "3"
 BREVO_DOI_TEMPLATE_ID        = "5"
 BREVO_DOI_TEMPLATE_ID_NOSUB  = "6"
-BREVO_INSTALLER_LIST_ID      = "4"    # TODO: replace with actual Brevo installer list ID
+BREVO_INSTALLER_LIST_ID      = "4"
 # BREVO_API_KEY is a secret — set via: npx wrangler secret put BREVO_API_KEY

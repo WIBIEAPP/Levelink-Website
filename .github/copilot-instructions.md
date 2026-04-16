@@ -58,9 +58,11 @@ Browser → POST JSON → Cloudflare Worker → Brevo DOI API → confirmation e
 
 | Item | Value |
 |---|---|
-| Mailing list ID | `3` |
+| Consumer mailing list ID | `3` |
+| Installer / B2B list ID | `4` |
 | DOI email template ID | `5` |
 | DOI API endpoint | `POST https://api.brevo.com/v3/contacts/doubleOptinConfirmation` |
+| Installer contact endpoint | `POST https://api.brevo.com/v3/contacts` (no DOI) |
 | Language | Dutch (NL) |
 
 > After subscribing, Brevo returns HTTP 204 (no body) on success. The Worker translates this to `{"ok":true}`.  
@@ -79,9 +81,10 @@ Browser → POST JSON → Cloudflare Worker → Brevo DOI API → confirmation e
 | Variable | Type | Value |
 |---|---|---|
 | `ALLOWED_ORIGIN` | Plaintext (wrangler.toml) | `https://www.levelink.be` |
-| `BREVO_LIST_ID` | Plaintext (wrangler.toml) | `3` |
+| `BREVO_LIST_ID` | Plaintext (wrangler.toml) | `3` — consumer pre-order list |
 | `BREVO_DOI_TEMPLATE_ID` | Plaintext (wrangler.toml) | `5` — used when `email_updates` is **checked** |
 | `BREVO_DOI_TEMPLATE_ID_NOSUB` | Plaintext (wrangler.toml) | `6` — used when `email_updates` is **unchecked** |
+| `BREVO_INSTALLER_LIST_ID` | Plaintext (wrangler.toml) | `4` — installer / B2B leads list |
 | `BREVO_API_KEY` | **Encrypted secret** | set via `wrangler secret put`, never in toml or code |
 
 `wrangler.toml` is intentionally committed to git. `BREVO_API_KEY` is intentionally excluded.
