@@ -24,7 +24,6 @@ All pages are vanilla HTML/CSS/JS — no frameworks, no bundler.
 
 - **Platform**: GitHub Pages, branch `main`
 - **Domain**: `www.levelink.be` (CNAME file points to `thomas-biesmans.github.io`)
-- **Active dev branch**: `feature/newsletter` (newsletter work; not yet merged to main)
 - Pushing to `main` deploys instantly; no CI/CD needed.
 
 ---
@@ -152,7 +151,6 @@ Local dev (e.g. `file://`) will be rejected. Use `localhost` with a local server
 ## Known TODOs / open issues
 
 - `contact.html` OG meta tags (`og:url`, `og:image`) still contain placeholder `https://jouwdomein.be/...` URLs — should be updated to `https://www.levelink.be/...`.
-- `feature/newsletter` branch has not been merged to `main` yet.
 
 ---
 
@@ -162,3 +160,11 @@ Local dev (e.g. `file://`) will be rejected. Use `localhost` with a local server
 - No frameworks, no npm dependencies in the site itself (only in `worker/` for Wrangler).
 - Keep pages lightweight and fast — no heavy third-party scripts.
 - Privacy-first: no cookies, no tracking beyond Cloudflare Web Analytics.
+
+## Git workflow
+
+- **Always work on a feature branch** — never commit directly to `main`.
+- Branch naming: `feature/<short-description>` (e.g. `feature/postcode-field`).
+- Open a **Pull Request** from the feature branch into `main` when the work is ready.
+- Use the GitHub CLI: `gh pr create --base main --head <branch> --title "..." --body "..."`
+- `main` is the GitHub Pages deploy branch — merging a PR deploys immediately.
