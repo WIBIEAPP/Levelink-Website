@@ -40,7 +40,9 @@ export default {
         EMAIL_UPDATES: data.email_updates === true,
       },
       includeListIds:  [Number(env.BREVO_LIST_ID)],
-      templateId:      Number(env.BREVO_DOI_TEMPLATE_ID),
+      templateId:      data.email_updates === true
+                         ? Number(env.BREVO_DOI_TEMPLATE_ID)
+                         : Number(env.BREVO_DOI_TEMPLATE_ID_NOSUB),
       redirectionUrl:  `${allowed}/?subscribed=1`,
     };
 
